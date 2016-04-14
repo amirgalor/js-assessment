@@ -2,14 +2,21 @@ exports = (typeof window === 'undefined') ? global : window;
 
 exports.objectsAnswers =  {
   alterContext : function(fn, obj) {
-
+    // This would be the easiest way to give fn the relevant scope
+    return fn.apply(obj);
   },
 
   alterObjects : function(constructor, greeting) {
-
+    constructor.prototype.greeting = greeting;
   },
 
   iterate : function(obj) {
-
+    var res = [];
+    for(var prop in obj){
+      if (obj.hasOwnProperty(prop)) {
+        res.push(prop + ": " + obj[prop]);
+      }
+    }
+    return res;
   }
 };
